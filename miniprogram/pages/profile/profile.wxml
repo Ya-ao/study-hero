@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="user-section">
+    <view class="user-info">
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image 
+          class="avatar" 
+          src="{{userInfo.avatarUrl || 'https://picsum.photos/200/200'}}" 
+          mode="aspectFill"
+        />
+      </button>
+      <view class="user-name">
+        <input 
+          class="nickname-input" 
+          type="nickname" 
+          placeholder="点击设置昵称" 
+          value="{{userInfo.nickName}}"
+          bindblur="onNicknameInput"
+        />
+      </view>
+    </view>
+  </view>
+
+  <loading show="{{loading}}" text="加载中..." />
+
+  <block wx:if="{{!loading}}">
+    <view class="stats-section">
+      <view class="section-title">学习统计</view>
+      <view class="stats-grid">
+        <stat-card title="总题数" value="{{stats.totalQuestions}}" icon="📝" />
+        <stat-card title="正确率" value="{{stats.correctRate}}" unit="%" icon="🎯" />
+        <stat-card title="连续天数" value="{{stats.streakDays}}" unit="天" icon="🔥" />
+      </view>
+    </view>
+
+    <view class="achievement-section" wx:if="{{achievements.length > 0}}">
+      <view class="section-title">我的成就</view>
+      <view class="achievement-list">
+        <view class="achievement-item" wx:for="{{achievements}}" wx:key="type">
+          <view class="achievement-icon">{{item.icon}}</view>
+          <view class="achievement-name">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-section">
+      <view class="section-title">学习历史</view>
+      <view class="history-list" wx:if="{{history.length > 0}}">
+        <view 
+          class="history-item" 
+          wx:for="{{history}}" 
+          wx:key="id"
+          data-item="{{item}}"
+          bindtap="onHistoryTap"
+        >
+          <view class="history-info">
+            <text class="history-topic">{{item.topic}}</text>
+            <text class="history-time">{{item.createTime}}</text>
+          </view>
+          <view class="history-score">
+            <text class="score-value">{{item.score}}</text>
+            <text class="score-unit">分</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-history" wx:else>
+        <text class="empty-text">还没有学习记录</text>
+      </view>
+    </view>
+  </block>
+</view>

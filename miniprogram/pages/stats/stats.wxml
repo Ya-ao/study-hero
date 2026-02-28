@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="today-section">
+    <view class="section-title">今日统计</view>
+    <view class="stats-grid">
+      <stat-card title="今日答题" value="{{todayStats.questionCount}}" icon="📝" />
+      <stat-card title="正确率" value="{{todayStats.correctRate}}" unit="%" icon="🎯" />
+      <stat-card title="连续天数" value="{{todayStats.streakDays}}" unit="天" icon="🔥" />
+    </view>
+  </view>
+
+  <loading show="{{loading && history.length === 0}}" text="加载中..." />
+
+  <view class="history-section">
+    <view class="section-title">学习历史</view>
+    <view class="history-list" wx:if="{{history.length > 0}}">
+      <view 
+        class="history-item" 
+        wx:for="{{history}}" 
+        wx:key="id"
+        data-item="{{item}}"
+        bindtap="onRecordTap"
+      >
+        <view class="history-left">
+          <view class="history-topic">{{item.topic}}</view>
+          <view class="history-meta">
+            <text class="meta-item">{{item.totalQuestions}}题</text>
+            <text class="meta-divider">|</text>
+            <text class="meta-item">{{item.createTime}}</text>
+          </view>
+        </view>
+        <view class="history-right">
+          <view class="history-score">{{item.score}}</view>
+          <view class="history-label">分</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty-section" wx:elif="{{!loading}}">
+      <text class="empty-text">还没有学习记录</text>
+    </view>
+    <loading show="{{loading && history.length > 0}}" text="加载更多..." />
+  </view>
+</view>

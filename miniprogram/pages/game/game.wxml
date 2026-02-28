@@ -1,0 +1,51 @@
+<view class="container">
+  <progress-bar 
+    percent="{{(currentIndex + 1) / questions.length * 100}}" 
+    current="{{currentIndex + 1}}" 
+    total="{{questions.length}}"
+  />
+
+  <loading show="{{loading}}" text="正在生成题目..." />
+
+  <block wx:if="{{!loading && questions.length > 0}}">
+    <view class="game-content">
+      <question-card 
+        question="{{questions[currentIndex]}}"
+        currentIndex="{{currentIndex}}"
+        totalCount="{{questions.length}}"
+        selectedOption="{{selectedOption}}"
+        showResult="{{showResult}}"
+        bindselect="onOptionSelect"
+      />
+    </view>
+
+    <view class="bottom-bar">
+      <block wx:if="{{!showResult}}">
+        <button 
+          class="confirm-btn" 
+          bindtap="onConfirmTap"
+          disabled="{{selectedOption === -1}}"
+        >
+          确认答案
+        </button>
+      </block>
+      <block wx:else>
+        <view class="result-info">
+          <view class="result-text {{selectedOption === questions[currentIndex].answer ? 'correct' : 'wrong'}}">
+            {{selectedOption === questions[currentIndex].answer ? '✓ 回答正确！' : '✗ 回答错误'}}
+          </view>
+          <view class="correct-answer" wx:if="{{selectedOption !== questions[currentIndex].answer}}">
+            正确答案：{{['A', 'B', 'C', 'D'][questions[currentIndex].answer]}}
+          </view>
+          <view class="explanation" wx:if="{{questions[currentIndex].explanation}}">
+            <view class="explanation-title">解析：</view>
+            <view class="explanation-content">{{questions[currentIndex].explanation}}</view>
+          </view>
+        </view>
+        <button class="next-btn" bindtap="onNextTap">
+          {{currentIndex < questions.length - 1 ? '下一题' : '查看结果'}}
+        </button>
+      </block>
+    </view>
+  </block>
+</view>

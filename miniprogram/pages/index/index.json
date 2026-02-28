@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "学习英雄",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "stat-card": "/components/stat-card/stat-card",
+    "topic-card": "/components/topic-card/topic-card",
+    "loading": "/components/loading/loading"
+  }
+}

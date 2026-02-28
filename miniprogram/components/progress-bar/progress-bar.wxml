@@ -1,0 +1,9 @@
+<view class="progress-bar">
+  <view class="progress-track">
+    <view class="progress-fill" style="width: {{percent}}%"></view>
+  </view>
+  <view class="progress-text">
+    <text class="current">{{current}}</text>
+    <text class="total">/{{total}}</text>
+  </view>
+</view>

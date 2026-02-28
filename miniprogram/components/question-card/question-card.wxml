@@ -1,0 +1,25 @@
+<view class="question-card">
+  <view class="question-header">
+    <text class="question-number">第{{currentIndex + 1}}题</text>
+    <text class="question-total">/共{{totalCount}}题</text>
+  </view>
+  
+  <view class="question-content">
+    <text class="question-text">{{question.question}}</text>
+  </view>
+  
+  <view class="options-list">
+    <view 
+      class="option-item {{selectedOption === index ? 'selected' : ''}} {{showResult && index === question.answer ? 'correct' : ''}} {{showResult && selectedOption === index && index !== question.answer ? 'wrong' : ''}}"
+      wx:for="{{question.options}}"
+      wx:key="index"
+      data-index="{{index}}"
+      bindtap="onOptionTap"
+    >
+      <view class="option-label">{{optionLabels[index]}}</view>
+      <text class="option-text">{{item}}</text>
+      <view class="option-icon" wx:if="{{showResult && index === question.answer}}">✓</view>
+      <view class="option-icon wrong-icon" wx:if="{{showResult && selectedOption === index && index !== question.answer}}">✗</view>
+    </view>
+  </view>
+</view>

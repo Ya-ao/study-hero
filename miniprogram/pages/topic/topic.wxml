@@ -1,0 +1,52 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">学习主题</view>
+    <input 
+      class="topic-input" 
+      placeholder="输入你想学习的主题..." 
+      value="{{topic}}"
+      bindinput="onTopicInput"
+    />
+  </view>
+
+  <view class="section" wx:if="{{hotTopics.length > 0}}">
+    <view class="section-title">热门主题</view>
+    <view class="hot-topics">
+      <view 
+        class="hot-tag {{topic === item ? 'active' : ''}}" 
+        wx:for="{{hotTopics}}" 
+        wx:key="index"
+        data-topic="{{item}}"
+        bindtap="onHotTopicTap"
+      >
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">难度选择</view>
+    <radio-group class="radio-group" bindchange="onDifficultyChange">
+      <label class="radio-item {{difficulty === item.value ? 'active' : ''}}" wx:for="{{difficultyOptions}}" wx:key="value">
+        <radio value="{{item.value}}" checked="{{difficulty === item.value}}" />
+        <text>{{item.label}}</text>
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="section">
+    <view class="section-title">题目数量</view>
+    <radio-group class="radio-group count-group" bindchange="onCountChange">
+      <label class="radio-item {{count === item.value ? 'active' : ''}}" wx:for="{{countOptions}}" wx:key="value">
+        <radio value="{{item.value}}" checked="{{count === item.value}}" />
+        <text>{{item.label}}</text>
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="start-btn" bindtap="onStartTap" loading="{{loading}}" disabled="{{loading}}">
+      开始答题
+    </button>
+  </view>
+</view>

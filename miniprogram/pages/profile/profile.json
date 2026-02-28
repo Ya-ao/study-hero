@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "stat-card": "/components/stat-card/stat-card",
+    "loading": "/components/loading/loading"
+  }
+}

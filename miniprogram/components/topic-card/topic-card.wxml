@@ -1,0 +1,10 @@
+<view class="topic-card" bindtap="onTap">
+  <view class="topic-info">
+    <text class="topic-name">{{topic.topic}}</text>
+    <text class="topic-time">{{topic.createTime || topic.time}}</text>
+  </view>
+  <view class="topic-score">
+    <text class="score-value">{{topic.score}}</text>
+    <text class="score-unit">分</text>
+  </view>
+</view>

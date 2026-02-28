@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="header">
+    <view class="logo">🎯 学习英雄</view>
+    <text class="slogan">AI问答引导式学习</text>
+  </view>
+
+  <view class="start-section">
+    <view class="start-card">
+      <view class="start-content">
+        <text class="start-title">开始学习之旅</text>
+        <text class="start-desc">选择主题，挑战自我</text>
+      </view>
+      <button class="start-btn" bindtap="onStartTap">立即开始</button>
+    </view>
+  </view>
+
+  <loading show="{{loading}}" text="加载中..." />
+
+  <block wx:if="{{!loading}}">
+    <view class="stats-section">
+      <view class="section-title">今日统计</view>
+      <view class="stats-grid">
+        <stat-card title="今日答题" value="{{todayStats.questionCount}}" icon="📝" />
+        <stat-card title="正确率" value="{{todayStats.correctRate}}" unit="%" icon="🎯" />
+        <stat-card title="连续天数" value="{{todayStats.streakDays}}" unit="天" icon="🔥" />
+      </view>
+    </view>
+
+    <view class="recent-section" wx:if="{{recentRecords.length > 0}}">
+      <view class="section-title">最近学习</view>
+      <view class="recent-list">
+        <view 
+          class="recent-item" 
+          wx:for="{{recentRecords}}" 
+          wx:key="id"
+          data-item="{{item}}"
+          bindtap="onRecentTap"
+        >
+          <view class="recent-info">
+            <text class="recent-topic">{{item.topic}}</text>
+            <text class="recent-time">{{item.createTime}}</text>
+          </view>
+          <view class="recent-score">
+            <text class="score-value">{{item.score}}</text>
+            <text class="score-unit">分</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-section" wx:if="{{recentRecords.length === 0}}">
+      <text class="empty-text">还没有学习记录，快来开始吧！</text>
+    </view>
+  </block>
+</view>

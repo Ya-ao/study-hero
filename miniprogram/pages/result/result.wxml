@@ -1,0 +1,68 @@
+<view class="container">
+  <loading show="{{loading}}" text="加载中..." />
+  
+  <block wx:if="{{!loading}}">
+  <view class="result-header">
+    <view class="result-icon">🎉</view>
+    <view class="result-title">答题完成！</view>
+    <view class="score-display">
+      <text class="score-value">{{score}}</text>
+      <text class="score-unit">分</text>
+    </view>
+    <view class="accuracy">正确率 {{correctCount}}/{{totalCount}}</view>
+  </view>
+
+  <view class="stats-row">
+    <view class="stat-item">
+      <text class="stat-value">{{correctCount}}</text>
+      <text class="stat-label">正确题数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{durationText}}</text>
+      <text class="stat-label">用时</text>
+    </view>
+  </view>
+
+  <view class="wrong-section" wx:if="{{wrongAnswers.length > 0}}">
+    <view class="section-title">错题回顾</view>
+    <view class="wrong-list">
+      <view class="wrong-item" wx:for="{{wrongAnswers}}" wx:key="id">
+        <view class="wrong-header">
+          <text class="wrong-number">Q{{index + 1}}</text>
+        </view>
+        <view class="wrong-question">{{item.question}}</view>
+        <view class="wrong-options">
+          <view class="wrong-option {{item.userAnswer === index ? 'user-answer' : ''}} {{item.answer === index ? 'correct-answer' : ''}}" wx:for="{{item.options}}" wx:for-item="option" wx:for-index="index" wx:key="index">
+            <text class="option-label">{{['A', 'B', 'C', 'D'][index]}}</text>
+            <text class="option-text">{{option}}</text>
+          </view>
+        </view>
+        <view class="answer-hint">
+          <text>你的答案：{{['A', 'B', 'C', 'D'][item.userAnswer] || '未作答'}}</text>
+          <text>正确答案：{{['A', 'B', 'C', 'D'][item.answer]}}</text>
+        </view>
+        <view class="wrong-explanation" wx:if="{{item.explanation}}">
+          <view class="explanation-label">解析：</view>
+          <view class="explanation-text">{{item.explanation}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons">
+    <button class="retry-btn" bindtap="onRetryTap">再来一次</button>
+    <button class="share-btn" open-type="share">分享成绩</button>
+    <button class="home-btn" bindtap="onHomeTap">返回首页</button>
+  </view>
+  </block>
+</view>
+
+<view class="achievement-modal" wx:if="{{showAchievementModal}}" bindtap="onAchievementClose">
+  <view class="modal-content" catchtap>
+    <view class="modal-icon">{{currentAchievement.icon}}</view>
+    <view class="modal-title">恭喜获得成就</view>
+    <view class="modal-name">{{currentAchievement.name}}</view>
+    <view class="modal-btn" bindtap="onAchievementClose">太棒了</view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "答题中",
+  "disableScroll": false,
+  "usingComponents": {
+    "progress-bar": "/components/progress-bar/progress-bar",
+    "question-card": "/components/question-card/question-card",
+    "loading": "/components/loading/loading"
+  }
+}
