@@ -26,8 +26,7 @@ Page({
     const app = getApp()
     if (!app.globalData.isLoggedIn) {
       try {
-        const openid = 'test-user-' + Date.now()
-        await app.loginWithOpenid(openid)
+        await app.login()
         this.loadData()
       } catch (error) {
         console.error('Login failed:', error)
