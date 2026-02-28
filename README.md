@@ -1,4 +1,4 @@
-# Study-Hero 学习英雄
+# Study-Hero 学习英雄（该应用为AI生成）
 
 <div align="center">
 
