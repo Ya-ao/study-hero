@@ -1,4 +1,4 @@
-const BASE_URL = 'http://101.37.25.146:3000'
+const BASE_URL = 'https://biographies-populations-recorded-berlin.trycloudflare.com'
 
 const DIFFICULTY_OPTIONS = [
   { value: 'easy', label: '简单' },
